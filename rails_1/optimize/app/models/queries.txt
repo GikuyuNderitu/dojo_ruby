@@ -1,0 +1,18 @@
+#1
+Number of queries 447
+
+#2
+Number of query: 2
+
+#3
+players = Player.includes(:team).where("teams.name = 'Chicago Bulls'").references(:team)
+
+#4
+players = Player.includes(:team).where("teams.stadium = 'Staples Center'").references(:team)
+players.each do |player|
+     puts player.team.name
+end
+
+
+#5
+teams = Team.select("players.name").includes(:players).where("players.name LIKE 'Z%'").references(:players)
