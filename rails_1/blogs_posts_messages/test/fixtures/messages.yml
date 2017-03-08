@@ -3,9 +3,11 @@
 one:
   author: MyString
   message: MyText
+  user: one
   post: one
 
 two:
   author: MyString
   message: MyText
+  user: two
   post: two

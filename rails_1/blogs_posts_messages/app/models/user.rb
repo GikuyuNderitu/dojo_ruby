@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-	has_many :owners, :posts, :messages
-	has_many :blogs, through: :owners
-
-	validates :first_name, :last_name, :email_address, presence: true
+	has_many :owners
+	has_many :posts
+	has_many :messages
+	has_many :blogs, :through => :owners
 end

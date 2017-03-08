@@ -3,6 +3,7 @@ class CreateMessages < ActiveRecord::Migration[5.0]
     create_table :messages do |t|
       t.string :author
       t.text :message
+      t.references :user, foreign_key: true
       t.references :post, foreign_key: true
 
       t.timestamps

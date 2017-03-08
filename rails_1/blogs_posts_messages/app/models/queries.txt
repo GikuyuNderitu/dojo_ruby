@@ -1,0 +1,86 @@
+#1
+def random_5
+   str = ''
+   (0...5).each do
+       str += (65+rand(26)).chr
+   end
+   str
+end
+
+
+(0...5).each do
+     User.create(first_name: random_5, last_name: random_5, email_address: "#{random_5 + '@' + random_5 + '.com'}")
+end
+
+(0...5).each do
+     Blog.create(name: random_5, description: random_5 * 2)
+end
+
+u1 = User.first
+Owner.create(user: u1, blog: Blog.first)
+Owner.create(user: u1, blog: Blog.second)
+Owner.create(user: u1, blog: Blog.third)
+
+#2
+Owner.create(user: User.second, blog: Blog.fourth)
+Owner.create(user: User.last, blog: Blog.fifth)
+
+#3
+u3 = User.third
+Owner.create(user: u3, blog: Blog.first)
+Owner.create(user: u3, blog: Blog.second)
+Owner.create(user: u3, blog: Blog.third)
+Owner.create(user: u3, blog: Blog.fourth)
+Owner.create(user: u3, blog: Blog.fifth)
+
+#4
+(0...3).each do
+	Post.create(title: random_5, content: random_5 * 20, blog: Blog.find(2), user: u1)
+end
+
+#5
+(0...5).each do
+	Post.create(title: random_5, content: random_5 * 14, blog: Blog.last, user: User.second)
+end
+
+(0..4).each_with_index do |num, idx|
+     Post.create(title: random_5, content: random_5 * 20, blog: Blog.find(idx+1), user: User.third)
+end
+
+
+#6
+(1..2).each do
+     Message.create(author:"#{u3.first_name} #{u3.last_name}", message: random_5 * 10, post: Post.first, user: User.third)
+end
+
+(0..2).each do
+     Message.create(author:"#{u3.first_name} #{u3.last_name}", message: random_5 * 10, post: Post.second, user: User.third)
+end
+
+#7
+(0..2).each do
+     Message.create(author:"#{u4.first_name} #{u4.last_name}", message: random_5 * 10, post: Post.last, user: u4)
+end
+
+Post.second.update(:user => User.last)
+
+#8
+Post.second.update(:content => "something else")
+
+#9
+User.find(3).blogs
+
+#10
+User.third.posts
+User.third.messages
+
+#11
+Blog.find(5).posts.joins(:user)
+
+#12
+Blog.find(5).messages.joins(:user)
+
+#13
+owners = Owner.where(blog: Blog.first, user: User.first)
+o1 = owners[0]
+o1.destroy
