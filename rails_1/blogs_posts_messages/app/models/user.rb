@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+	has_many :comments, :as => :commentable
 	has_many :owners
 	has_many :posts
 	has_many :messages
