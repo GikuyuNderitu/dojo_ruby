@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>All the Dojos</title>
+		<style media="screen">
+			.link{
+				display: inline-block;
+				margin-top: 50px;
+				color: blue;
+			}
+
+			.error{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1><%= @dojo.branch%> Dojo</h1>
+
+			<div class="info">
+				<p>Address: <%= @dojo.street%></p>
+				<p>City: <%= @dojo.city%></p>
+				<p>State: <%= @dojo.state%></p>
+			</div>
+
+			<a href="/dojos">Go Home</a>
+			<a href="/dojos/<%=@dojo.id%>/edit">Edit</a>
+		</div>
+	</body>
+</html>

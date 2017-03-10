@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>All the Dojos</title>
+		<style media="screen">
+			.link{
+				display: inline-block;
+				margin-top: 50px;
+				color: blue;
+			}
+			.success{
+				color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Listing Dojos</h1>
+			<% if flash[:success] %>
+				<p class='success'><%= flash[:success] %></p>
+			<% end %>
+			<table>
+				<thead>
+					<tr>
+						<th>Coding Dojo Branch</th>
+						<th>Street</th>
+						<th>City</th>
+						<th>State</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @dojos.each do |dojo| %>
+					<tr>
+						<td><%= dojo.branch %></td>
+						<td><%= dojo.street %></td>
+						<td><%= dojo.city %></td>
+						<td><%= dojo.state %></td>
+						<td>
+							<a href="/dojos/<%=dojo.id %>">Show</a>
+							<a href="/dojos/<%=dojo.id %>/edit">Edit</a>
+							<a href="/dojos/<%=dojo.id %>" data-method="delete">Delete</a>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<a href="/dojos/new" class="link">New Dojo</a>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>All the Dojos</title>
+		<style media="screen">
+			.link{
+				display: inline-block;
+				margin-top: 50px;
+				color: blue;
+			}
+
+			.error{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>New Dojo</h1>
+
+			<% if flash[:errors] %>
+				<% flash[:errors].each do |msg| %>
+				<p class='error'><%= msg %></p>
+				<% end %>
+			<% end %>
+
+			<form class="dojo-form" action="/dojos" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				<label for="" class="row">Branch<input type="text" class="input-field" name="dojo[branch]"></label>
+				<label for="" class="row">Street<input type="text" class="input-field" name="dojo[street]"></label>
+				<label for="" class="row">City<input type="text" class="input-field" name="dojo[city]"></label>
+				<label for="" class="row">State<input type="text" class="input-field" name="dojo[state]"></label>
+				<input type="submit" class="submit" value="Create Dojo!">
+			</form>
+			<a href="/dojos" class="link">Go Home</a>
+		</div>
+	</body>
+</html>
