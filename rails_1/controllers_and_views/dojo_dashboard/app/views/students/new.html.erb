@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>All the Dojos</title>
+		<style media="screen">
+			.link{
+				display: inline-block;
+				margin-top: 50px;
+				color: blue;
+			}
+
+			.error{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>New Student</h1>
+
+			<% if flash[:errors] %>
+				<% flash[:errors].each do |msg| %>
+				<p class='error'><%= msg %></p>
+				<% end %>
+			<% end %>
+
+			<form class="dojo-form" action="/dojos/<%= @dojo.id%>/students" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				<label for="" class="row">First Name:<input type="text" class="input-field" name="student[first_name]"></label>
+				<label for="" class="row">Last Name:<input type="text" class="input-field" name="student[last_name]"></label>
+				<label for="" class="row">Email:<input type="text" class="input-field" name="student[email]"></label>
+				<label for="" class="row">Dojo:
+					<select class="input-field" name="dojo">
+						<option value="<%= @dojo.id%>"><%= @dojo.branch%></option>
+						<% @dojos.each do |dojo|%>
+							<option value="<%= dojo.id%>"><%= dojo.branch%></option>
+						<% end %>
+					</select>
+				</label>
+				<input type="submit" class="submit" value="Create Dojo!">
+			</form>
+			<a href="/dojos" class="link">Go Home</a>
+			<span>|</span>
+			<a href="/dojos/<%=@dojo.id%>/students"><%=@dojo.branch%></a>
+		</div>
+	</body>
+</html>
