@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Ninja Gold</title>
+		<style media="screen">
+			.container{
+				display: flex;
+				flex-direction: column;
+				width: 80%;
+				margin: 0 auto;
+			}
+
+			.red{
+				color: red;
+			}
+
+			.green{
+				color: green;
+			}
+
+			.forms{
+				display: flex;
+				justify-content: space-around;
+			}
+
+			.form-container{
+				border: 3px solid #000;
+				padding: 20px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.submit{
+				padding: 5px 16px;
+				background: #06d;
+				color: white;
+				font-size: 1.2em;
+				font-weight: 500;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="gold-box"><span>Your Gold: <%= @gold_count %></span></div>
+			<div class="forms">
+				<div class="form-container">
+					<h4>Farm</h4>
+					<p>(earns 10 - 20 golds)</p>
+					<form action="/money" class="form-data" method="post">
+						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+						<input type="hidden" name="golds[building]" value="farm">
+						<input type="submit" class="submit" value="Find Gold!">
+					</form>
+				</div>
+				<div class="form-container">
+					<h4>Cave</h4>
+					<p>(earns 5 - 10 golds)</p>
+					<form action="/money" class="form-data" method="post">
+						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+						<input type="hidden" name="golds[building]" value="cave">
+						<input type="submit" class="submit" value="Find Gold!">
+					</form>
+				</div>
+				<div class="form-container">
+					<h4>House</h4>
+					<p>(earns 2 - 5 golds)</p>
+					<form action="/money" class="form-data" method="post">
+						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+						<input type="hidden" name="golds[building]" value="house">
+						<input type="submit" class="submit" value="Find Gold!">
+					</form>
+				</div>
+				<div class="form-container">
+					<h4>Casino</h4>
+					<p>(earns/takes 0 - 50 golds)</p>
+					<form action="/money" class="form-data" method="post">
+						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+						<input type="hidden" name="golds[building]" value="casino">
+						<input type="submit" class="submit" value="Find Gold!">
+					</form>
+				</div>
+			</div>
+			<section>
+				<h4>Activities:</h4>
+				<div class="activities-section">
+					<% @messages.each do |msg|%>
+					<p
+						class='<%= msg["my_class"] %>'>
+						<%= msg["msg"] %>
+					</p>
+					<% end %>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>
