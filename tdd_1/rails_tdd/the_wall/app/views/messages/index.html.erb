@@ -1,0 +1,46 @@
+<header>
+	<h4>CodingDojo Wall</h4>
+	<div class="right">
+		<h3>Welcome, <%=@name%></h3>
+		<a id="logout" href="/logout">Log Out</a>
+	</div>
+</header>
+
+<main>
+	<div class="container">
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |err|%>
+			<p><%= err %></p>
+			<% end %>
+		<% end %>
+		<div class="message-container">
+			<h1>Post a message</h1>
+			<form class="" action="/messages/create" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				<textarea name="message[message]" rows="8" cols="80" id="message_message"></textarea>
+				<input type="submit" value="Post a Message" class="submit">
+			</form>
+		</div>
+		<div class="messages">
+			<h2>Messages</h2>
+			<% @messages.each do |msg|%>
+			<div class="message">
+				<h3><%= msg.user.username %> - <%= msg.created_at.strftime("%B %d, %Y") %> </h3>
+				<p><%= msg.message %></p>
+				<div class="comment-box">
+					<h3>Comments:</h3>
+					<% msg.comments.each do |comment| %>
+						<h4><%= comment.user.username %> - <%= comment.created_at.strftime("%B %d, %Y") %></h4>
+						<p><%= comment.comment%></p>
+					<% end %>
+					<form class="comment-form" action="/comments/<%= msg.id %>/create" method="post">
+						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+						<textarea id="comment_comment" name="comment[comment]" rows="8" cols="80"></textarea>
+						<input type="submit" value="Leave Comment">
+					</form>
+				</div>
+			</div>
+			<%end%>
+		</div>
+	</div>
+</main>
